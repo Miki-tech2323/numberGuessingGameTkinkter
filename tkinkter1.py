@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import messagebox
 import random
 
 class myGui:
@@ -10,7 +11,7 @@ class myGui:
         self.label = tk.Label(text="Number guesing game!!!")
         self.entry = tk.Entry(self.window, width=5, font=("Arial", 12))
         self.labelEnter = tk.Label(text="Enter a number:")
-        self.enterBtn = tk.Button(self.window, text="Click me!!")
+        self.enterBtn = tk.Button(self.window, text="Click me!!", command=self.clickMe)
 
 
         self.enterBtn.place(x= 200,y=70)
@@ -21,13 +22,16 @@ class myGui:
     def clickMe(self):
         num = self.entry.get()
         
-        while True:
-            if num == self.numRandom:
-                self.messagebox.showinfo("Win", "You won")
-                break
+        if int(num) == self.numRandom:
+            messagebox.showinfo("Win", "You won")
+            self.window.destroy()
+        elif int(num) < self.numRandom:
+            messagebox.showinfo("Lost", "Try greater number")
+        elif int(num) > self.numRandom:
+            messagebox.showinfo("Lost", "Try smaller number")
 
 
 
 
 myGui()
-myGui.clickMe()
+
